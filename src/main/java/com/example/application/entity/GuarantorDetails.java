@@ -1,7 +1,11 @@
 package com.example.application.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
@@ -19,5 +23,8 @@ import lombok.NoArgsConstructor;
 public class GuarantorDetails 
 {
 	@Id
+	@SequenceGenerator(name = "GuarantorDetails_ID", sequenceName = "GuarantorDetails_ID", allocationSize = 1, initialValue =101)
+	@GeneratedValue(strategy =GenerationType.SEQUENCE,generator = "GuarantorDetails_ID")
+	@Column(name ="Guarantor_Id")
 	private Integer GuarantorDetailsID;
 }
