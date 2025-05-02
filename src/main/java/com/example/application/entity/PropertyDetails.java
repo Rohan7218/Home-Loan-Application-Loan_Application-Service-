@@ -59,7 +59,7 @@ public class PropertyDetails {
 	private String propertyLocation;
 	
 	@Column(name = "Built_Up_Area")
-	private Double builtUpAreaq;
+	private Double builtUpArea;
 	
 	@Column(name = "Carpet_Area")
 	private Double carpetArea;

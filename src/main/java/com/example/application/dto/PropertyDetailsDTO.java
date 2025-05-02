@@ -19,18 +19,16 @@ public class PropertyDetailsDTO {
 	private String projectName;
 	
 	@Enumerated(EnumType.STRING)
-	
-	private String propertyType;
+	private PropertyType propertyType;
 	
 	@Enumerated(EnumType.STRING)
-	
-	private String propertyStatus ;
+	private PropertyStatus propertyStatus ;
 
 	
 	private String propertyLocation;
 	
 	
-	private Double builtUpAreaq;
+	private Double builtUpArea;
 	
 	
 	private Double carpetArea;
@@ -57,7 +55,7 @@ public class PropertyDetailsDTO {
 	private String state ;
 	
 	@Enumerated(EnumType.STRING)
-	private String ownershipStatus;
+	private OwnershipStatus ownershipStatus;
 
 	
 	private LocalDate possesionDate;

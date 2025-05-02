@@ -3,6 +3,8 @@ package com.example.application.service;
 import java.util.List;
 
 import com.example.application.dto.PropertyDetailsDTO;
+import com.example.application.dto.PropertyDocumentDTO;
+import com.example.application.dto.UpdatePropertyDetailsDTO;
 import com.example.application.entity.PropertyDetails;
 
 public interface PropertyDetailsService {
@@ -12,6 +14,10 @@ public interface PropertyDetailsService {
 	List<PropertyDetails> getAllPropertyDetails();
 
 	PropertyDetails getPropertyDetails(Integer customerId);
+
+	String updatePropertyDetails(Integer applicantId, UpdatePropertyDetailsDTO updatePropertyDetailsDTO);
+
+	String uploadPropertyDocuments(Integer applicantId, PropertyDocumentDTO propertyDocumentDTO);
 
 	
 
