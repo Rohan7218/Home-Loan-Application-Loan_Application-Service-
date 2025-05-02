@@ -12,4 +12,8 @@ public interface LoanDetailsService {
 
 	List<LoanDetails> getAllLoanDetails();
 
+	LoanDetails getLoanDetail(Integer applicantId);
+
+	String updateLoanDetails(LoanDetailsDTO loanDetailsDTO, Integer applicantId);
+
 }
