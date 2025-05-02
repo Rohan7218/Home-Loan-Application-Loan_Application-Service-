@@ -100,11 +100,6 @@ public class EmployeeDetailsServiceImpl implements EmployeeDetailsService
 	
 	
 	
-	
-	
-	
-	
-	
 	public static String generatePassword() {
 		String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 	    SecureRandom random = new SecureRandom();
