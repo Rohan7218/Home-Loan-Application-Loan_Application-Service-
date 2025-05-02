@@ -1,6 +1,7 @@
 package com.example.application.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
@@ -17,5 +18,6 @@ import lombok.NoArgsConstructor;
 @Table(name = "Guarantor_Details")
 public class GuarantorDetails 
 {
-		
+	@Id
+	private Integer GuarantorDetailsID;
 }

@@ -1,6 +1,7 @@
 package com.example.application.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
@@ -13,9 +14,11 @@ import lombok.NoArgsConstructor;
 @DynamicUpdate
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+//@AllArgsConstructor
 @Table(name = "Ledger_Details")
 public class LedgerDetails 
 {
-		
+
+	@Id
+	private Integer LedgerDetailsID;
 }
