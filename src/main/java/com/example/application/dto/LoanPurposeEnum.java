@@ -1,0 +1,10 @@
+package com.example.application.dto;
+
+public enum LoanPurposeEnum {
+
+	PURCHASE_OF_PLOT_FOR_CONSTRUCTION_OF_HOUSE,
+	PURCHASE_OF_NEW_HOUSE_OR_FLAT,
+	PURCHASE_OF_OLD_HOUSE_OR_FLAT,
+	CONSTRUCTION_OF_NEW_HOUSE_OR_FLAT
+	
+}
