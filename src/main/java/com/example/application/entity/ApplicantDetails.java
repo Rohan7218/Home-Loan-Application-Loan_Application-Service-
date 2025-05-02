@@ -22,9 +22,9 @@ import lombok.NoArgsConstructor;
 @Table(name = "Applicant_Details")
 public class ApplicantDetails 
 {
-	@Column(name ="Customer_Id")
+	@Column(name ="Applicant_Id")
 	@Id
-	private Integer customerId;
+	private Integer applicantId;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "Employee_Id")
