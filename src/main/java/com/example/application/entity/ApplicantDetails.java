@@ -3,6 +3,8 @@ package com.example.application.entity;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -22,9 +24,10 @@ import lombok.NoArgsConstructor;
 @Table(name = "Applicant_Details")
 public class ApplicantDetails 
 {
-	@Column(name ="Customer_Id")
+	@Column(name ="Applicant_Id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
-	private Integer customerId;
+	private Integer applicantId;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "Employee_Id")
@@ -42,9 +45,7 @@ public class ApplicantDetails
 	@JoinColumn(name = "Guarantor_Id")
 	private GuarantorDetails guarantorId;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "Ledger_Id")
-	private LedgerDetails ledgerId;
+
 	
 	
 }
