@@ -24,9 +24,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "Applicant_Details")
 public class ApplicantDetails 
 {
-	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name ="Applicant_Id")
 	@Column(name ="Applicant_Id")
 	@Id
 	private Integer applicantId;
@@ -46,7 +44,5 @@ public class ApplicantDetails
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "Guarantor_Id")
 	private GuarantorDetails guarantorId;
-	
-	
-	
+
 }

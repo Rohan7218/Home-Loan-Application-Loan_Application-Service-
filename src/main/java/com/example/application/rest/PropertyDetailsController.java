@@ -10,11 +10,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.application.dto.PropertyDetailsDTO;
+import com.example.application.dto.PropertyDocumentDTO;
+import com.example.application.dto.UpdatePropertyDetailsDTO;
 import com.example.application.entity.PropertyDetails;
 import com.example.application.response.ApiResponse;
 import com.example.application.service.PropertyDetailsService;
@@ -49,17 +52,35 @@ public class PropertyDetailsController
 		return new ResponseEntity<ApiResponse<Object>>(apiResponse,HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "/propertyDetails/{customerId}")
-	public ResponseEntity<ApiResponse<Object>> getPropertyDetails(@PathVariable Integer customerId)
+	@GetMapping(value = "/propertyDetails/{applicantId}")
+	public ResponseEntity<ApiResponse<Object>> getPropertyDetails(@PathVariable Integer applicantId)
 	{
 		LOGGER.info("PropertyDetailsController : GetMapping : getPropertyDetails : Entry");
-		PropertyDetails propertyDetails=propertyDetailsService.getPropertyDetails(customerId);
+		PropertyDetails propertyDetails=propertyDetailsService.getPropertyDetails(applicantId);
 		ApiResponse<Object> apiResponse=new ApiResponse<Object>(propertyDetails);
 		LOGGER.info("PropertyDetailsController : GetMapping : getPropertyDetails : Exit");	
 		return new ResponseEntity<ApiResponse<Object>>(apiResponse,HttpStatus.OK);
 	}
 	
 	
-	 
+	@PutMapping(value = "/propertyDetails/{applicantId}")
+	public ResponseEntity<ApiResponse<String>> updatePropertyDetails(@PathVariable Integer applicantId,@RequestBody UpdatePropertyDetailsDTO updatePropertyDetailsDTO)
+	{
+		LOGGER.info("PropertyDetailsController : PutMapping : updatePropertyDetails : Entry");
+		String msg=propertyDetailsService.updatePropertyDetails(applicantId,updatePropertyDetailsDTO);
+		ApiResponse<String> apiResponse=new ApiResponse<String>(msg);
+		LOGGER.info("PropertyDetailsController : PutMapping : updatePropertyDetails : Exit");	
+		return new ResponseEntity<ApiResponse<String>>(apiResponse,HttpStatus.OK);
+	}
+	
+	 @PostMapping(value = "/propertyDetails/{applicantId}")
+	public ResponseEntity<ApiResponse<String>> uploadPropertyDocuments(@PathVariable Integer applicantId,@RequestBody PropertyDocumentDTO propertyDocumentDTO)
+	{
+		 LOGGER.info("PropertyDetailsController : PostMapping : uploadPropertyDocuments : Entry");
+			String msg=propertyDetailsService.uploadPropertyDocuments(applicantId,propertyDocumentDTO);
+			ApiResponse<String> apiResponse=new ApiResponse<String>(msg);
+			LOGGER.info("PropertyDetailsController : uploadPropertyDocuments : updatePropertyDetails : Exit");	
+			return new ResponseEntity<ApiResponse<String>>(apiResponse,HttpStatus.OK);
+	}
 	
 }
