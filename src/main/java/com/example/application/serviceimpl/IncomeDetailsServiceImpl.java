@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.example.application.dto.IncomeDetailsDTO;
 import com.example.application.dto.OccupationEnum;
 import com.example.application.entity.IncomeDetails;
+import com.example.application.entity.LoanDetails;
 import com.example.application.entity.NonSalaried;
 import com.example.application.entity.Salaried;
 import com.example.application.repository.IncomeDetailsRepository;
@@ -35,7 +36,6 @@ public class IncomeDetailsServiceImpl implements IncomeDetailsService
 		if(incomeDetailsDTO.getOccupation().equals(OccupationEnum.SALARIED) ||incomeDetailsDTO.getOccupation().equals(OccupationEnum.PENSIONER))
 		{
 			Salaried salaried = modelMapper.map(incomeDetailsDTO, Salaried.class);
-//			salariedIncomeDetailsRepository.save(salaried);
 			
 			IncomeDetails incomeDetails=new IncomeDetails();
 								   incomeDetails.setSalariedId(salaried);

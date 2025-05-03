@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class GuarantorLoaclAddress {
+public class GuarantorLocalAddress {
 
 	@Id
 	@SequenceGenerator(name = "Guarantor_Local_AddressId",sequenceName = "Guarantor_Local_AddressId",allocationSize = 1,initialValue = 101)

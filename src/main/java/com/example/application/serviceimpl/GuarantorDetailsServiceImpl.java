@@ -12,7 +12,6 @@ import com.example.application.dto.GuarantorDetailsDTO;
 import com.example.application.dto.UpdateGuarantorDetailsDTO;
 import com.example.application.entity.ApplicantDetails;
 import com.example.application.entity.GuarantorDetails;
-import com.example.application.entity.PropertyDetails;
 import com.example.application.repository.ApplicantDetailsRepository;
 import com.example.application.repository.GuarantorDetailsRespotory;
 import com.example.application.service.GuarantorDetailsService;
@@ -32,12 +31,23 @@ public class GuarantorDetailsServiceImpl implements GuarantorDetailsService
 	private static final Logger LOGGER=LoggerFactory.getLogger(GuarantorDetailsServiceImpl.class);
 
 	@Override
-	public String addGuarantorDetails(GuarantorDetailsDTO guarantorDetailsDTO) {
-		LOGGER.debug("GuarantorDetailsServiceImpl : addGuarantorDetails : Entry");
-		 GuarantorDetails guarantorDetails = modelMapper.map(guarantorDetailsDTO, GuarantorDetails.class);
-		 guarantorDetailsRespotory.save(guarantorDetails);
-		LOGGER.debug("GuarantorDetailsServiceImpl : addGuarantorDetails : Exit");
-		return "!!..GuarantorDetails Added Succesfully ..!!";
+	public String addGuarantorDetails(GuarantorDetailsDTO guarantorDetailsDTO, Integer guarantorId)
+	{
+		if(guarantorDetailsRespotory.findById(guarantorId).isPresent())
+		{
+			GuarantorDetails existedGuarantorDetails = guarantorDetailsRespotory.findById(guarantorId).get();
+					
+			LOGGER.debug("GuarantorDetailsServiceImpl : addGuarantorDetails : Entry");
+			 GuarantorDetails guarantorDetails = modelMapper.map(guarantorDetailsDTO,GuarantorDetails.class);
+			 							guarantorDetails.setGuarantorDetailsID(guarantorId);
+			 							guarantorDetails.setGuarantorLoaclAddress(existedGuarantorDetails.getGuarantorLoaclAddress());
+			 							guarantorDetails.setGuarantorPermanentAddress(existedGuarantorDetails.getGuarantorPermanentAddress());
+			 guarantorDetailsRespotory.save(guarantorDetails);
+			LOGGER.debug("GuarantorDetailsServiceImpl : addGuarantorDetails : Exit");
+			return "!!..GuarantorDetails Added Succesfully ..!!";
+		}
+		return null;
+		
 	}
 	
 	

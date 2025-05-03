@@ -5,7 +5,7 @@ import com.example.application.dto.UpdateGuarantorAddressDTO;
 
 public interface GuarantorAddressService {
 
-	String addGuarantorAddress(GuarantorAddressDTO guarantorAddressDTO);
+	String addGuarantorAddress(GuarantorAddressDTO guarantorAddressDTO, Integer guarantorId);
 
 	String updateGuarantorLocalAddress(Integer applicantId, UpdateGuarantorAddressDTO updateGuarantorAddressDTO);
 

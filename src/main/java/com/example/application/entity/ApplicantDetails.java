@@ -28,6 +28,7 @@ public class ApplicantDetails
 	@Column(name ="Applicant_Id")
 	@Id
 	private Integer applicantId;
+	
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "Property_Id")

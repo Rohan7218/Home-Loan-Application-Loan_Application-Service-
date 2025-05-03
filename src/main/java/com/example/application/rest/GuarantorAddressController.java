@@ -28,11 +28,11 @@ public class GuarantorAddressController {
 	private static final Logger LOGGER=LoggerFactory.getLogger(GuarantorAddressController.class);
 	
 	
-	@PostMapping
-	public ResponseEntity<ApiResponse<String>> addGuarantorAddress(@RequestBody GuarantorAddressDTO guarantorAddressDTO)
+	@PostMapping(value = "/{guarantorId}")
+	public ResponseEntity<ApiResponse<String>> addGuarantorAddress(@RequestBody GuarantorAddressDTO guarantorAddressDTO, @PathVariable Integer guarantorId)
 	{
 		LOGGER.info("GuarantorAddressService : PostMapping : addGuarantorAddress : Entry");
-		String msg=guarantorAddressService.addGuarantorAddress(guarantorAddressDTO);
+		String msg=guarantorAddressService.addGuarantorAddress(guarantorAddressDTO, guarantorId);
 		ApiResponse<String> apiResponse=new ApiResponse<String>(msg);
 		LOGGER.info("GuarantorAddressService : PostMapping : addGuarantorAddress : Exit");
 		return new ResponseEntity<ApiResponse<String>>(apiResponse, HttpStatus.CREATED);

@@ -63,7 +63,7 @@ public class GuarantorDetails
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name ="Guarantor_LOcal_Address")
-	private GuarantorLoaclAddress guarantorLoaclAddress;
+	private GuarantorLocalAddress guarantorLoaclAddress;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name ="Guarantor_Permanent_Address")
