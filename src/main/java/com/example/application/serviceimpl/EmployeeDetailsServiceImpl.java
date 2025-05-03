@@ -97,9 +97,6 @@ public class EmployeeDetailsServiceImpl implements EmployeeDetailsService
 		return "Employee Details Not Found ID :-"+" "+employeeID;
 	}
 	
-	
-	
-	
 	public static String generatePassword() {
 		String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 	    SecureRandom random = new SecureRandom();

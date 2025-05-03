@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.application.entity.ApplicantDetails;
-import com.example.application.entity.EmployeeDetails;
 import com.example.application.entity.GuarantorDetails;
+import com.example.application.entity.GuarantorLocalAddress;
+import com.example.application.entity.GuarantorPermanentAddress;
+import com.example.application.entity.IncomeDetails;
+import com.example.application.entity.LoanDetails;
 import com.example.application.entity.PropertyDetails;
 import com.example.application.repository.ApplicantDetailsRepository;
 import com.example.application.service.ApplicantDetailsService;
@@ -25,19 +28,28 @@ public class ApplicantDetailsServiceImpl implements ApplicantDetailsService
 	public String addApplicantDetailsService() 
 	{
 		LOGGER.info("ApplicantDetailsServiceImpl : PostMapping : addApplicantDetailsService : Entry");
-		EmployeeDetails empployeeDetails=new EmployeeDetails();
-		
+				
 		PropertyDetails propertyDetails=new PropertyDetails();
 		
-//		LoanDetails loanDetails=new LoanDetails();
+		LoanDetails loanDetails=new LoanDetails();
 		
+	    GuarantorLocalAddress guarantorLocalAddress=new GuarantorLocalAddress();
+	    GuarantorPermanentAddress guarantorPermanentAddress=new GuarantorPermanentAddress();
+	    
 		GuarantorDetails guarantorDetails=new GuarantorDetails();
+								   guarantorDetails.setGuarantorLoaclAddress(guarantorLocalAddress);
+								   guarantorDetails.setGuarantorPermanentAddress(guarantorPermanentAddress);
+		
+		IncomeDetails incomeDetails=new IncomeDetails();
+		
 		
 		ApplicantDetails applicantDetails=new ApplicantDetails();
-								  applicantDetails.setEmployeeId(empployeeDetails);
+							      applicantDetails.setPropertyId(propertyDetails);
+							      applicantDetails.setLoanId(loanDetails);
 								  applicantDetails.setGuarantorId(guarantorDetails);
-//								  applicantDetails.setLoanId(loanDetails);
-								  applicantDetails.setPropertyId(propertyDetails);
+								  applicantDetails.setIncomeId(incomeDetails);
+								  
+								  								  
 
 	    applicantDetailsRepository.save(applicantDetails);
 	    LOGGER.debug("ApplicantDetailsServiceImpl : PostMapping : addApplicantDetailsService : Exit");

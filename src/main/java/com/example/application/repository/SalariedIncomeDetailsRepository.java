@@ -3,9 +3,10 @@ package com.example.application.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.application.entity.GuarantorLocalAddress;
+import com.example.application.entity.Salaried;
 
 @Repository
-public interface GuarantorLoaclAddressRepository extends JpaRepository<GuarantorLocalAddress, Integer>{
+public interface SalariedIncomeDetailsRepository extends JpaRepository<Salaried, Integer>
+{
 
 }

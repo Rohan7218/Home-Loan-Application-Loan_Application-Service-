@@ -6,5 +6,4 @@ public enum EmployeeProfile {
     RELATIONAL_EXECUTIVE,
     CREDIT_MANAGER,
     DISBURSEMENT_OFFICER
-	
 }
