@@ -38,6 +38,9 @@ public class PropertyDetailsServiceImpl implements PropertyDetailsService {
 		LOGGER.debug("PropertyDetailsServiceImpl : addDependentInfo : Entry");
 		PropertyDetails propertyDetails = modelMapper.map(propertyDetailsDTO, PropertyDetails.class);
 		propertyDetailsRepository.save(propertyDetails);
+		ApplicantDetails applicantDetails=new ApplicantDetails();
+		applicantDetails.setPropertyId(propertyDetails);
+		applicantDetailsRepository.save(applicantDetails);
 		LOGGER.debug("PropertyDetailsServiceImpl : addDependentInfo : Exit");
 		return "PropertyDetails Added Succesfully";
 	}
