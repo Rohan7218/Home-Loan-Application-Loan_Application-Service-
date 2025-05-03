@@ -6,7 +6,7 @@ import com.example.application.entity.GuarantorDetails;
 
 public interface GuarantorDetailsService {
 
-	String addGuarantorDetails(GuarantorDetailsDTO guarantorDetailsDTO);
+	String addGuarantorDetails(GuarantorDetailsDTO guarantorDetailsDTO, Integer guarantorId);
 
 	GuarantorDetails getGuarantorDetails(Integer applicantId);
 
