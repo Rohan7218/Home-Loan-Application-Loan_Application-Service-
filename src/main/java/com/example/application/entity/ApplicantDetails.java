@@ -30,10 +30,6 @@ public class ApplicantDetails
 	private Integer applicantId;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "Employee_Id")
-	private EmployeeDetails employeeId;
-	
-	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "Property_Id")
 	private PropertyDetails propertyId;
 	
@@ -44,5 +40,11 @@ public class ApplicantDetails
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "Guarantor_Id")
 	private GuarantorDetails guarantorId;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "Income_Id")
+	private IncomeDetails incomeId;
+	
+	
 
 }

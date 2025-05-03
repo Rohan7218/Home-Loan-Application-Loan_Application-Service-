@@ -1,0 +1,7 @@
+package com.example.application.dto;
+
+public enum OrganizationTypeEnum 
+{
+	CENTRAL_GOVERNMENT, STATE_GOVERNMENT, QUASI_GOVERNMENT, 
+	PUBLIC_SECTOR, DEFENCE, CORPORATES, OTHER_INSTITUTIONS
+}

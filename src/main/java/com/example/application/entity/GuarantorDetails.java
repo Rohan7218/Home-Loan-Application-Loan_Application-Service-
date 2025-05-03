@@ -27,4 +27,6 @@ public class GuarantorDetails
 	@GeneratedValue(strategy =GenerationType.SEQUENCE,generator = "GuarantorDetails_ID")
 	@Column(name ="Guarantor_Id")
 	private Integer GuarantorDetailsID;
+	
+
 }
