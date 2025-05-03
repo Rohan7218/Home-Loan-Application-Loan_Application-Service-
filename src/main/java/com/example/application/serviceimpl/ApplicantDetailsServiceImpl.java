@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.example.application.entity.ApplicantDetails;
 import com.example.application.entity.EmployeeDetails;
 import com.example.application.entity.GuarantorDetails;
+import com.example.application.entity.LoanDetails;
 import com.example.application.entity.PropertyDetails;
 import com.example.application.repository.ApplicantDetailsRepository;
 import com.example.application.service.ApplicantDetailsService;
@@ -29,14 +30,14 @@ public class ApplicantDetailsServiceImpl implements ApplicantDetailsService
 		
 		PropertyDetails propertyDetails=new PropertyDetails();
 		
-//		LoanDetails loanDetails=new LoanDetails();
+		LoanDetails loanDetails=new LoanDetails();
 		
 		GuarantorDetails guarantorDetails=new GuarantorDetails();
 		
 		ApplicantDetails applicantDetails=new ApplicantDetails();
 								  applicantDetails.setEmployeeId(empployeeDetails);
 								  applicantDetails.setGuarantorId(guarantorDetails);
-//								  applicantDetails.setLoanId(loanDetails);
+								  applicantDetails.setLoanId(loanDetails);
 								  applicantDetails.setPropertyId(propertyDetails);
 
 	    applicantDetailsRepository.save(applicantDetails);
