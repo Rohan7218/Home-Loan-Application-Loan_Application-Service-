@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.application.dto.LoanDetailsDTO;
 import com.example.application.entity.LoanDetails;
+import com.example.application.exceptionhandling.CustomeException;
 import com.example.application.repository.ApplicantDetailsRepository;
 import com.example.application.repository.LoanDetailsRepository;
 import com.example.application.rest.LoanDetailsController;
@@ -42,32 +43,53 @@ public class LoanDetailsServiceImpl implements LoanDetailsService {
 			LOGGER.debug("LoanDetailsServiceImpl : addLoanInfo : Exit");
 			return "!!!...Loan Details Added Succesfully...!!!";
 		}
-		return null;
+		else
+		{
+			LOGGER.debug("LoanDetailsServiceImpl : addLoanInfo : Exit");
+			throw new CustomeException("!!!...Invalid Load Details ID...!!!");
+		}
 	}
 
 	@Override
 	public List<LoanDetails> getAllLoanDetails() {
 		LOGGER.debug("LoanDetailsServiceImpl : getAllLoanDetails : Entry");
 		List<LoanDetails> loanDetailsList = loanDetailsRepository.findAll();
-		LOGGER.debug("LoanDetailsServiceImpl : getAllLoanDetails : Exit");
-		return loanDetailsList;
+		if(!loanDetailsList.isEmpty())
+		{
+			LOGGER.debug("LoanDetailsServiceImpl : getAllLoanDetails : Exit");
+			return loanDetailsList;
+		}
+		else
+		{
+			LOGGER.debug("LoanDetailsServiceImpl : getAllLoanDetails : Exit");
+			throw new CustomeException("!!!...Loan Details Records Are Not Available...!!!");
+		}
 	}
 
 	@Override
-	public LoanDetails getLoanDetail(Integer applicantId) {
+	public LoanDetails getLoanDetail(Integer applicantId)
+	{
 		LOGGER.debug("LoanDetailsServiceImpl : getLoanDetails : Entry");
-		if (applicantDetailsRepository.findById(applicantId).isPresent()) {
+		if (applicantDetailsRepository.findById(applicantId).isPresent()) 
+		{
 			LoanDetails loanDetails = applicantDetailsRepository.findById(applicantId).get().getLoanId();
 			LOGGER.debug("LoanDetailsServiceImpl : getAllLoanDetails : Exit");
 			return loanDetails;
 		}
-		return null;
+		else
+		{
+			LOGGER.debug("LoanDetailsServiceImpl : getAllLoanDetails : Exit");
+			throw new CustomeException("!!!...For Given Applicant Id Loan Details Record Is Not Availablea...!!!");
+		}
+		
+		
 	}
 
 	@Override
 	public String updateLoanDetails(LoanDetailsDTO loanDetailsDTO, Integer applicantId) {
 
-		if (applicantDetailsRepository.existsById(applicantId)) {
+		if (applicantDetailsRepository.existsById(applicantId)) 
+		{
 			LOGGER.debug("LoanDetailsServiceImpl : updateLoanDetails : Entry");
 			LoanDetails existingLoanDetails = applicantDetailsRepository.findById(applicantId).get().getLoanId();
 
@@ -115,7 +137,10 @@ public class LoanDetailsServiceImpl implements LoanDetailsService {
 			LOGGER.debug("LoanDetailsServiceImpl : updateLoanDetails : Exit");
 			return "!!!...Loan Details Updated Successfully...!!!";
 		}
-		LOGGER.debug("LoanDetailsServiceImpl : updateLoanDetails : Exit");
-		return "!!!...Record Not Found for this LoanID...!!!";
+		else
+		{
+			LOGGER.debug("LoanDetailsServiceImpl : updateLoanDetails : Exit");
+			throw new CustomeException("!!!...For Given Applicant Id Loan Details Record Is Not Availablea...!!!");
+		}
 	}
 }
