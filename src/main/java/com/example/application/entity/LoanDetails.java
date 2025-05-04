@@ -12,7 +12,9 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
 
+import com.example.application.dto.AccountTypeEnum;
 import com.example.application.dto.LoanPurposeEnum;
+import com.example.application.dto.accountStatusEnum;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,7 +32,7 @@ public class LoanDetails {
 	@SequenceGenerator(name = "LoanDetails_ID", sequenceName = "LoanDetails_ID", allocationSize = 1, initialValue =101)
 	@GeneratedValue(strategy =GenerationType.SEQUENCE,generator = "LoanDetails_ID")
 	@Column(name = "LoanDetails_ID")
-	private Integer LoanDetailsID;
+	private Integer loanDetailsID;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "Loan_Purpose")
@@ -48,14 +50,22 @@ public class LoanDetails {
 	@Column(name = "Tenure_years")
 	private Integer tenure;
 	
-	@Column(name = "Monatorium_Period_Years")
+	@Column(name = "Moratorium_Period_Months")
 	private Integer moratorium;
 	
 	@Column(name = "Requested_Loan_Amount")
 	private Long requestedLoanAmount;
 
 	
+	@Column(name = "Account_Type")
+	@Enumerated(EnumType.STRING)
+	private AccountTypeEnum accountType;
 	
+	@Column(name = "Account_Holder_Name")
+	private String accountHolderName;
+		
+	@Column(name = "Customer_Account_Number")
+	private Long accountNumber;
 	
 	
 	
