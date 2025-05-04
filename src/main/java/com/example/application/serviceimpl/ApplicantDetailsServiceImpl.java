@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.application.dto.LoanApplicantionCustomerIdDTO;
 import com.example.application.entity.ApplicantDetails;
 import com.example.application.entity.GuarantorDetails;
 import com.example.application.entity.GuarantorLocalAddress;
@@ -25,7 +26,7 @@ public class ApplicantDetailsServiceImpl implements ApplicantDetailsService
 	private ApplicantDetailsRepository applicantDetailsRepository;
 	
 	@Override
-	public String addApplicantDetailsService() 
+	public String addApplicantDetailsService(LoanApplicantionCustomerIdDTO loanApplicantionCustomerIdDTO) 
 	{
 		LOGGER.info("ApplicantDetailsServiceImpl : PostMapping : addApplicantDetailsService : Entry");
 				
@@ -34,6 +35,7 @@ public class ApplicantDetailsServiceImpl implements ApplicantDetailsService
 		LoanDetails loanDetails=new LoanDetails();
 		
 	    GuarantorLocalAddress guarantorLocalAddress=new GuarantorLocalAddress();
+	    
 	    GuarantorPermanentAddress guarantorPermanentAddress=new GuarantorPermanentAddress();
 	    
 		GuarantorDetails guarantorDetails=new GuarantorDetails();
@@ -48,9 +50,8 @@ public class ApplicantDetailsServiceImpl implements ApplicantDetailsService
 							      applicantDetails.setLoanId(loanDetails);
 								  applicantDetails.setGuarantorId(guarantorDetails);
 								  applicantDetails.setIncomeId(incomeDetails);
-								  
-								  								  
-
+								  applicantDetails.setCustomerId(loanApplicantionCustomerIdDTO.getCustomerId());
+				
 	    applicantDetailsRepository.save(applicantDetails);
 	    LOGGER.debug("ApplicantDetailsServiceImpl : PostMapping : addApplicantDetailsService : Exit");
 		return "!!!...Applicant Details Saved successfully...!!!";

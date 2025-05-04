@@ -31,15 +31,17 @@ public class LoanDetailsController {
 
 
 	@PostMapping(value = "/loanDetails/{loanDetailsID}")
-	public ResponseEntity<String> addLoanDetails(@RequestBody LoanDetailsDTO loanDetailsDTO,@PathVariable  Integer loanDetailsID) {
+	public ResponseEntity<ApiResponse<String>> addLoanDetails(@RequestBody LoanDetailsDTO loanDetailsDTO,@PathVariable  Integer loanDetailsID) {
 		LOGGER.info("LoanDetailsController : PostMapping : addLoanDetails : Entry");
 
 		String msg = loanDetailsService.addLoanDetails(loanDetailsDTO,loanDetailsID);
-		if (msg != null) {
-			return new ResponseEntity<String>(msg, HttpStatus.CREATED);
+		if (msg != null) 
+		{
+			ApiResponse<String> apiResponse=new ApiResponse<String>(msg);
+			return new ResponseEntity<ApiResponse<String>>(apiResponse, HttpStatus.CREATED);
 		}
 		LOGGER.info("LoanDetailsController : PostMapping : addLoanDetails : Exit");
-		return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<ApiResponse<String>>(HttpStatus.BAD_REQUEST);
 	}
 
 	@GetMapping(value = "/loanDetails")

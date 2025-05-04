@@ -29,6 +29,8 @@ public class ApplicantDetails
 	@Id
 	private Integer applicantId;
 	
+	@Column(name = "Customer_Id")
+	private Integer customerId;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "Property_Id")
@@ -45,5 +47,7 @@ public class ApplicantDetails
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "Income_Id")
 	private IncomeDetails incomeId;
+	
+	
 
 }
