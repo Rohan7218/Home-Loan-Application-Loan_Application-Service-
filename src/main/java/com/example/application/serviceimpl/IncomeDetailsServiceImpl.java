@@ -9,6 +9,7 @@ import com.example.application.dto.OccupationEnum;
 import com.example.application.entity.IncomeDetails;
 import com.example.application.entity.NonSalaried;
 import com.example.application.entity.Salaried;
+import com.example.application.exceptionhandling.CustomeException;
 import com.example.application.repository.IncomeDetailsRepository;
 import com.example.application.repository.NonSalariedIncomeDetailsRepository;
 import com.example.application.repository.SalariedIncomeDetailsRepository;
@@ -60,7 +61,10 @@ public class IncomeDetailsServiceImpl implements IncomeDetailsService
 				return "!!!...Non Salaried Details Saved SuccessFully...!!!";
 			}
 		}
-		return null;
+		else
+		{
+			throw new CustomeException("!!!...Invalid Income Id...!!!");
+		}
 		
 		
 	}
