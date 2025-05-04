@@ -32,7 +32,7 @@ public class LoanDetails {
 	@SequenceGenerator(name = "LoanDetails_ID", sequenceName = "LoanDetails_ID", allocationSize = 1, initialValue =101)
 	@GeneratedValue(strategy =GenerationType.SEQUENCE,generator = "LoanDetails_ID")
 	@Column(name = "LoanDetails_ID")
-	private Integer LoanDetailsID;
+	private Integer loanDetailsID;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "Loan_Purpose")

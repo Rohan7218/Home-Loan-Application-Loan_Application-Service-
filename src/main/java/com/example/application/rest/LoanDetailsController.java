@@ -30,11 +30,11 @@ public class LoanDetailsController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(LoanDetailsController.class);
 
 
-	@PostMapping(value = "/loanDetails")
-	public ResponseEntity<String> addLoanDetails(@RequestBody LoanDetailsDTO loanDetailsDTO) {
+	@PostMapping(value = "/loanDetails/{loanDetailsID}")
+	public ResponseEntity<String> addLoanDetails(@RequestBody LoanDetailsDTO loanDetailsDTO,@PathVariable  Integer loanDetailsID) {
 		LOGGER.info("LoanDetailsController : PostMapping : addLoanDetails : Entry");
 
-		String msg = loanDetailsService.addLoanDetails(loanDetailsDTO);
+		String msg = loanDetailsService.addLoanDetails(loanDetailsDTO,loanDetailsID);
 		if (msg != null) {
 			return new ResponseEntity<String>(msg, HttpStatus.CREATED);
 		}

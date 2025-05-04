@@ -4,6 +4,6 @@ import com.example.application.dto.IncomeDetailsDTO;
 
 public interface IncomeDetailsService {
 
-	String incomeDetailsService(IncomeDetailsDTO incomeDetailsDTO);
+	String incomeDetailsService(IncomeDetailsDTO incomeDetailsDTO, Integer incomeId);
 
 }

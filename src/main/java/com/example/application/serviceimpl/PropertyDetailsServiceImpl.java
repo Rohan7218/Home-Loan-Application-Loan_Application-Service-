@@ -33,16 +33,19 @@ public class PropertyDetailsServiceImpl implements PropertyDetailsService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(PropertyDetailsController.class);
 
 	@Override
-	public String addPropertyDetails(PropertyDetailsDTO propertyDetailsDTO) {
-
-		LOGGER.debug("PropertyDetailsServiceImpl : addDependentInfo : Entry");
-		PropertyDetails propertyDetails = modelMapper.map(propertyDetailsDTO, PropertyDetails.class);
-		propertyDetailsRepository.save(propertyDetails);
-		ApplicantDetails applicantDetails=new ApplicantDetails();
-		applicantDetails.setPropertyId(propertyDetails);
-		applicantDetailsRepository.save(applicantDetails);
-		LOGGER.debug("PropertyDetailsServiceImpl : addDependentInfo : Exit");
-		return "PropertyDetails Added Succesfully";
+	public String addPropertyDetails(PropertyDetailsDTO propertyDetailsDTO, Integer propertyDetailsID)
+	{
+		if(propertyDetailsRepository.findById(propertyDetailsID).isPresent())
+		{
+			LOGGER.debug("PropertyDetailsServiceImpl : addDependentInfo : Entry");
+			PropertyDetails propertyDetails = modelMapper.map(propertyDetailsDTO, PropertyDetails.class);
+									 propertyDetails.setPropertyDetailsID(propertyDetailsID);
+									 
+			propertyDetailsRepository.save(propertyDetails);
+			LOGGER.debug("PropertyDetailsServiceImpl : addDependentInfo : Exit");
+			return "PropertyDetails Added Succesfully";
+		}
+			return null;
 	}
 
 	@Override

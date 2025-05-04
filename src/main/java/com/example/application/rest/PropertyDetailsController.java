@@ -32,11 +32,11 @@ public class PropertyDetailsController
 	private static final Logger LOGGER=LoggerFactory.getLogger(PropertyDetailsController.class);
 
 	
-	@PostMapping(value = "/propertyDetails")
-	public ResponseEntity<ApiResponse<String>> addPropertyDetails(@RequestBody PropertyDetailsDTO propertyDetailsDTO)
+	@PostMapping(value = "/propertyDetails/{propertyDetailsID}")
+	public ResponseEntity<ApiResponse<String>> addPropertyDetails(@RequestBody PropertyDetailsDTO propertyDetailsDTO, @PathVariable Integer propertyDetailsID)
 	{
 		LOGGER.info("PropertyDetailsController : PostMapping : addPropertyDetails : Entry");
-		String msg=propertyDetailsService.addPropertyDetails(propertyDetailsDTO);
+		String msg=propertyDetailsService.addPropertyDetails(propertyDetailsDTO, propertyDetailsID);
 		ApiResponse<String> apiResponse=new ApiResponse<String>(msg);
 		LOGGER.info("PropertyDetailsController : PostMapping : addPropertyDetails : Exit");
 		return new ResponseEntity<ApiResponse<String>>(apiResponse, HttpStatus.CREATED);
@@ -73,7 +73,7 @@ public class PropertyDetailsController
 		return new ResponseEntity<ApiResponse<String>>(apiResponse,HttpStatus.OK);
 	}
 	
-	 @PostMapping(value = "/propertyDetails/{applicantId}")
+	 @PostMapping(value = "/propertyDetails/documets/{applicantId}")
 	public ResponseEntity<ApiResponse<String>> uploadPropertyDocuments(@PathVariable Integer applicantId,@RequestBody PropertyDocumentDTO propertyDocumentDTO)
 	{
 		 LOGGER.info("PropertyDetailsController : PostMapping : uploadPropertyDocuments : Entry");
