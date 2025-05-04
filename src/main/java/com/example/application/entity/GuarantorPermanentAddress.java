@@ -25,8 +25,8 @@ public class GuarantorPermanentAddress {
 	@Id
 	@SequenceGenerator(name = "Guarantor_Permanent_AddressId",sequenceName = "Guarantor_Permanent_AddressId",allocationSize = 1,initialValue = 101)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator ="Guarantor_Permanent_AddressId" )
-	@Column(name = "Guarantor_Local_Address_ID")
-	private Integer localAddressId;
+	@Column(name = "Permanent_Local_Address_ID")
+	private Integer permanentAddressId;
 
 	@Column(name = "Guarantor_Permanent_Areaname")
 	private String permanentAreaname;
