@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.application.dto.GuarantorAddressDTO;
 import com.example.application.dto.UpdateGuarantorAddressDTO;
+import com.example.application.entity.GuarantorDetails;
 import com.example.application.entity.GuarantorLocalAddress;
 import com.example.application.entity.GuarantorPermanentAddress;
 import com.example.application.repository.ApplicantDetailsRepository;
@@ -41,19 +42,23 @@ public class GuarantorAddressServiceImpl implements GuarantorAddressService {
 	{
 		if(guarantorDetailsRespotory.findById(guarantorId).isPresent())
 		{
+			GuarantorDetails guarantorDetails = guarantorDetailsRespotory.findById(guarantorId).get();
+			
 			LOGGER.debug("GuarantorAddressServiceImpl : addGuarantorAddress : Entry");
 
 			GuarantorLocalAddress localAddress = modelMapper.map(guarantorAddressDTO, GuarantorLocalAddress.class);
-			GuarantorPermanentAddress permanentAddress = modelMapper.map(guarantorAddressDTO,
-					GuarantorPermanentAddress.class);
-
+												  localAddress.setLocalAddressId(guarantorDetails.getGuarantorLoaclAddress().getLocalAddressId());
+												 
+			GuarantorPermanentAddress permanentAddress = modelMapper.map(guarantorAddressDTO,GuarantorPermanentAddress.class);
+														  permanentAddress.setPermanentAddressId(guarantorDetails.getGuarantorPermanentAddress().getPermanentAddressId());
+														  
 			guarantorLoaclAddressRepository.save(localAddress);
 			guarantorPermanentAddressRepositoy.save(permanentAddress);
 			LOGGER.debug("GuarantorAddressServiceImpl : addGuarantorAddress : Exit");
 			return "!!..Guarantor Local And Permanent Address Add Succesfully ..!!";
-		}
+		}	
 		
-		return null;
+			return null;
 	}
 
 	@Override
