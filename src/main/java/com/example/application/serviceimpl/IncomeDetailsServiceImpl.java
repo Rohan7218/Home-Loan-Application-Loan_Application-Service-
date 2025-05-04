@@ -72,14 +72,9 @@ public class IncomeDetailsServiceImpl implements IncomeDetailsService
 
 		else
 		{
+			LOGGER.debug("IncomeDetailsServiceImpl : addIncomeDetails : Exit");
 			throw new CustomeException("!!!...Invalid Income Id...!!!");
 		}
-
-		LOGGER.debug("IncomeDetailsServiceImpl : addIncomeDetails : Exit");
-		return null;
-
-		
-		
 	}
 	
 	
@@ -214,17 +209,16 @@ public class IncomeDetailsServiceImpl implements IncomeDetailsService
 				
 			nonSalariedIncomeDetailsRepository.save(existedNonSalaried);
 			LOGGER.debug("IncomeDetailsServiceImpl : updateIncomeDetails : Exit");
-			return  "!!...Non_salaried Details Updated Succesfully...!!";
-				
+			return  "!!...Non_salaried Details Updated Succesfully...!!";	
 			}
-			
 		}
-		LOGGER.debug("IncomeDetailsServiceImpl : updateIncomeDetails : Exit");
-		return "!!...Income Details Not Found For that ID..!!";
+		else
+		{
+			LOGGER.debug("IncomeDetailsServiceImpl : updateIncomeDetails : Exit");
+			throw new CustomeException("!!!...For Given Income Id Record Is Not Present...!!!");
+		}
 	}
-	
-	
-	
+
 	@Override
 	public IncomeDetails getIncomeDetails(Integer incomeId) {
 		LOGGER.debug("IncomeDetailsServiceImpl : getIncomeDetails : Entry");
@@ -234,8 +228,11 @@ public class IncomeDetailsServiceImpl implements IncomeDetailsService
 			LOGGER.debug("IncomeDetailsServiceImpl : getIncomeDetails : Exit");
 			return existedIncomeDetails;
 		}
-		LOGGER.debug("IncomeDetailsServiceImpl : getIncomeDetails : Exit");
-		return null;
+		else
+		{
+			LOGGER.debug("IncomeDetailsServiceImpl : getIncomeDetails : Exit");
+			throw new CustomeException("!!!...For Given Income Id Record Is Not Present...!!!");
+		}
 	}
 		
 	
