@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.application.dto.GuarantorDetailsDTO;
-import com.example.application.repository.ApplicantDetailsRepository;
+import com.example.application.dto.LoanApplicantionCustomerIdDTO;
 import com.example.application.response.ApiResponse;
 import com.example.application.service.ApplicantDetailsService;
 
@@ -26,10 +25,10 @@ public class ApplicantDetailsController
 	private ApplicantDetailsService applicantDetailsService;
 	
 	@PostMapping(value = "/applicants")
-	public ResponseEntity<ApiResponse<String>> addApplicantDetailsService()
+	public ResponseEntity<ApiResponse<String>> addApplicantDetailsService(@RequestBody LoanApplicantionCustomerIdDTO loanApplicantionCustomerIdDTO)
 	{
 		LOGGER.info("ApplicantDetailsController : PostMapping : addApplicantDetailsService : Entry");
-		String msg=applicantDetailsService.addApplicantDetailsService();
+		String msg=applicantDetailsService.addApplicantDetailsService(loanApplicantionCustomerIdDTO);
 		ApiResponse<String> apiResponse=new ApiResponse<String>(msg);
 		LOGGER.info("ApplicantDetailsController : PostMapping : addApplicantDetailsService : Exit");
 		return new ResponseEntity<ApiResponse<String>>(apiResponse, HttpStatus.CREATED);
