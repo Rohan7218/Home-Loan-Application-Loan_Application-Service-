@@ -51,7 +51,6 @@ public class EmployeeDetailsController
 		return new ResponseEntity<ApiResponse<Object>>(apiResponse, HttpStatus.OK);
 	}
 	
-	
 	@GetMapping(value = "/employees")
 	public ResponseEntity<ApiResponse<Object>> getAllEmployee()
 	{
@@ -61,7 +60,6 @@ public class EmployeeDetailsController
 		LOGGER.info("EmployeeDetailsController : GetMapping : getAllEmployee : Exit");
 		return new ResponseEntity<ApiResponse<Object>>(apiResponse, HttpStatus.OK);
 	}
-	
 	
 	@PutMapping(value = "/employees/{employeeID}")
 	public ResponseEntity<ApiResponse<String>> updateEmployeeDetails(@PathVariable Integer employeeID,@RequestBody EmployeeDetailsUpdateDTO employeeDetailsUpdateDTO)

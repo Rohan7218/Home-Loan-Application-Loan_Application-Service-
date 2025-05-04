@@ -14,6 +14,7 @@ import com.example.application.dto.PropertyDocumentDTO;
 import com.example.application.dto.UpdatePropertyDetailsDTO;
 import com.example.application.entity.ApplicantDetails;
 import com.example.application.entity.PropertyDetails;
+import com.example.application.exceptionhandling.CustomeException;
 import com.example.application.repository.ApplicantDetailsRepository;
 import com.example.application.repository.PropertyDetailsRepository;
 import com.example.application.rest.PropertyDetailsController;
@@ -33,21 +34,40 @@ public class PropertyDetailsServiceImpl implements PropertyDetailsService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(PropertyDetailsController.class);
 
 	@Override
-	public String addPropertyDetails(PropertyDetailsDTO propertyDetailsDTO) {
-
-		LOGGER.debug("PropertyDetailsServiceImpl : addDependentInfo : Entry");
-		PropertyDetails propertyDetails = modelMapper.map(propertyDetailsDTO, PropertyDetails.class);
-		propertyDetailsRepository.save(propertyDetails);
-		LOGGER.debug("PropertyDetailsServiceImpl : addDependentInfo : Exit");
-		return "PropertyDetails Added Succesfully";
+	public String addPropertyDetails(PropertyDetailsDTO propertyDetailsDTO, Integer propertyDetailsID)
+	{
+		if(propertyDetailsRepository.findById(propertyDetailsID).isPresent())
+		{
+			LOGGER.debug("PropertyDetailsServiceImpl : addDependentInfo : Entry");
+			PropertyDetails propertyDetails = modelMapper.map(propertyDetailsDTO, PropertyDetails.class);
+									 propertyDetails.setPropertyDetailsID(propertyDetailsID);
+									 
+			propertyDetailsRepository.save(propertyDetails);
+			LOGGER.debug("PropertyDetailsServiceImpl : addDependentInfo : Exit");
+			return "PropertyDetails Added Succesfully";
+		}
+		else
+		{
+			LOGGER.debug("PropertyDetailsServiceImpl : addDependentInfo : Exit");
+			throw new CustomeException("!!!...Property Details Id Is Invalid...!!!");
+		}
 	}
 
 	@Override
-	public List<PropertyDetails> getAllPropertyDetails() {
+	public List<PropertyDetails> getAllPropertyDetails() 
+	{
 		LOGGER.debug("PropertyDetailsServiceImpl : getAllPropertyDetails : Entry");
 		List<PropertyDetails> list = propertyDetailsRepository.findAll();
-		LOGGER.debug("PropertyDetailsServiceImpl : getAllPropertyDetails : Exit");
-		return list;
+		if(!list.isEmpty())
+		{
+			LOGGER.debug("PropertyDetailsServiceImpl : getAllPropertyDetails : Exit");
+			return list;
+		}
+		else
+		{
+			LOGGER.debug("PropertyDetailsServiceImpl : getAllPropertyDetails : Exit");
+			throw new CustomeException("!!!...Income Details Records are not Available...!!!");
+		}
 	}
 
 	@Override
@@ -55,18 +75,24 @@ public class PropertyDetailsServiceImpl implements PropertyDetailsService {
 
 		LOGGER.debug("PropertyDetailsServiceImpl : getPropertyDetails : Entry");
 		Optional<ApplicantDetails> optional = applicantDetailsRepository.findById(applicantId);
-		if (optional.isPresent()) {
+		if (optional.isPresent())
+		{
 			PropertyDetails propertyDetails = optional.get().getPropertyId();
 			LOGGER.debug("PropertyDetailsServiceImpl : getPropertyDetails : Exit");
 			return propertyDetails;
 		}
-		LOGGER.debug("PropertyDetailsServiceImpl : getPropertyDetails : Exit");
-		return null;
+		else
+		{
+			LOGGER.debug("PropertyDetailsServiceImpl : getPropertyDetails : Exit");
+			throw new CustomeException("!!!...For Given Applicant Id Property Details Record Is Not Available...!!!");
+		}
 	}
 
 	@Override
-	public String updatePropertyDetails(Integer applicantId, UpdatePropertyDetailsDTO updatePropertyDetailsDTO) {
-		if (applicantDetailsRepository.existsById(applicantId)) {
+	public String updatePropertyDetails(Integer applicantId, UpdatePropertyDetailsDTO updatePropertyDetailsDTO) 
+	{
+		if (applicantDetailsRepository.existsById(applicantId)) 
+		{
 			LOGGER.debug("PropertyDetailsServiceImpl : updatePropertyDetails : Entry");
 			PropertyDetails propertyDetails = applicantDetailsRepository.findById(applicantId).get().getPropertyId();
 			if (updatePropertyDetailsDTO.getReraId() != null) {
@@ -128,22 +154,30 @@ public class PropertyDetailsServiceImpl implements PropertyDetailsService {
 			LOGGER.debug("PropertyDetailsServiceImpl : updatePropertyDetails : Exit");
 			return "!!..Property Details Updated Succesfully ...!!";
 		}
-		LOGGER.debug("PropertyDetailsServiceImpl : updatePropertyDetails : Exit");
-		return "!!..Applicant Id Not Found ...!!";
+		else
+		{
+			LOGGER.debug("PropertyDetailsServiceImpl : updatePropertyDetails : Exit");
+			throw new CustomeException("!!!...For Given Applicant Id Property Details Record Is Not Available...!!!");
+		}
 	}
 
 	@Override
-	public String uploadPropertyDocuments(Integer applicantId, PropertyDocumentDTO propertyDocumentDTO) {
+	public String uploadPropertyDocuments(Integer applicantId, PropertyDocumentDTO propertyDocumentDTO) 
+	{
 		Optional<ApplicantDetails> optional = applicantDetailsRepository.findById(applicantId);
-		if (optional.isPresent()) {
+		if (optional.isPresent()) 
+		{
 			LOGGER.debug("PropertyDetailsServiceImpl : uploadPropertyDocuments : Entry");
 			PropertyDetails propertyDetails = modelMapper.map(propertyDocumentDTO, PropertyDetails.class);
 			propertyDetailsRepository.save(propertyDetails);
 			LOGGER.debug("PropertyDetailsServiceImpl : uploadPropertyDocuments : Exit");
 			return "Property Details Document upload succesfully";
 		}
-		LOGGER.debug("PropertyDetailsServiceImpl : uploadPropertyDocuments : Exit");
-		return "Applicant Id Not Found";
+		else
+		{
+			LOGGER.debug("PropertyDetailsServiceImpl : uploadPropertyDocuments : Exit");
+			throw new CustomeException("!!!...For Given Applicant Id Property Details Record Is Not Available...!!!");
+		}
 	}
 
 }

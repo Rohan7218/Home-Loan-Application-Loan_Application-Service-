@@ -1,0 +1,120 @@
+package com.example.application.serviceimpl;
+
+import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.application.dto.GuarantorAddressDTO;
+import com.example.application.dto.UpdateGuarantorAddressDTO;
+import com.example.application.entity.GuarantorDetails;
+import com.example.application.entity.GuarantorLocalAddress;
+import com.example.application.entity.GuarantorPermanentAddress;
+import com.example.application.exceptionhandling.CustomeException;
+import com.example.application.repository.ApplicantDetailsRepository;
+import com.example.application.repository.GuarantorDetailsRespotory;
+import com.example.application.repository.GuarantorLoaclAddressRepository;
+import com.example.application.repository.GuarantorPermanentAddressRepositoy;
+import com.example.application.service.GuarantorAddressService;
+
+@Service
+public class GuarantorAddressServiceImpl implements GuarantorAddressService {
+
+	@Autowired
+	private GuarantorLoaclAddressRepository guarantorLoaclAddressRepository;
+
+	@Autowired
+	private GuarantorPermanentAddressRepositoy guarantorPermanentAddressRepositoy;
+
+	@Autowired
+	private ApplicantDetailsRepository applicantDetailsRepository;
+	
+	@Autowired
+	private GuarantorDetailsRespotory guarantorDetailsRespotory;
+
+	@Autowired
+	private ModelMapper modelMapper;
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(GuarantorAddressServiceImpl.class);
+
+	@Override
+	public String addGuarantorAddress(GuarantorAddressDTO guarantorAddressDTO, Integer guarantorId) 
+	{
+		if(guarantorDetailsRespotory.findById(guarantorId).isPresent())
+		{
+			GuarantorDetails guarantorDetails = guarantorDetailsRespotory.findById(guarantorId).get();
+			
+			LOGGER.debug("GuarantorAddressServiceImpl : addGuarantorAddress : Entry");
+
+			GuarantorLocalAddress localAddress = modelMapper.map(guarantorAddressDTO, GuarantorLocalAddress.class);
+												  localAddress.setLocalAddressId(guarantorDetails.getGuarantorLoaclAddress().getLocalAddressId());
+												 
+			GuarantorPermanentAddress permanentAddress = modelMapper.map(guarantorAddressDTO,GuarantorPermanentAddress.class);
+														  permanentAddress.setPermanentAddressId(guarantorDetails.getGuarantorPermanentAddress().getPermanentAddressId());
+														  
+			guarantorLoaclAddressRepository.save(localAddress);
+			guarantorPermanentAddressRepositoy.save(permanentAddress);
+			LOGGER.debug("GuarantorAddressServiceImpl : addGuarantorAddress : Exit");
+			return "!!..Guarantor Local And Permanent Address Add Succesfully ..!!";
+		}	
+		else
+		{
+			LOGGER.debug("GuarantorAddressServiceImpl : addGuarantorAddress : Exit");
+			throw new CustomeException("!!!...Invalid Guarantor Id...!!!");
+		}
+	}
+
+	@Override
+	public String updateGuarantorLocalAddress(Integer applicantId, UpdateGuarantorAddressDTO updateGuarantorAddressDTO) 
+	{
+		if (applicantDetailsRepository.existsById(applicantId))
+		{
+			LOGGER.debug("GuarantorAddressServiceImpl : updateGuarantorLocalAddress : Entry");
+			GuarantorLocalAddress guarantorLoaclAddress = applicantDetailsRepository.findById(applicantId).get().getGuarantorId().getGuarantorLoaclAddress();
+			if(updateGuarantorAddressDTO.getLocalHouseNumber()!=null)
+			{
+				guarantorLoaclAddress.setLocalHouseNumber(updateGuarantorAddressDTO.getLocalHouseNumber());
+			}
+			
+			if(updateGuarantorAddressDTO.getLocalAreaname()!=null)
+			{
+				guarantorLoaclAddress.setLocalAreaname(updateGuarantorAddressDTO.getLocalAreaname());
+			}
+			
+			if(updateGuarantorAddressDTO.getLocalCityname()!=null)
+			{
+				guarantorLoaclAddress.setLocalCityname(updateGuarantorAddressDTO.getLocalCityname());
+			}
+			
+			if(updateGuarantorAddressDTO.getLocalDistrict()!=null)
+			{
+				guarantorLoaclAddress.setLocalDistrict(updateGuarantorAddressDTO.getLocalDistrict());
+			}
+			
+			if(updateGuarantorAddressDTO.getLocalState()!=null)
+			{
+				guarantorLoaclAddress.setLocalState(updateGuarantorAddressDTO.getLocalState());
+			}
+			
+			if(updateGuarantorAddressDTO.getLocalPincode()!=null)
+			{
+				guarantorLoaclAddress.setLocalPincode(updateGuarantorAddressDTO.getLocalPincode());
+			}
+			
+			if(updateGuarantorAddressDTO.getLocalStreetName()!=null)
+			{
+				guarantorLoaclAddress.setLocalStreetName(updateGuarantorAddressDTO.getLocalStreetName());
+			}
+			guarantorLoaclAddressRepository.save(guarantorLoaclAddress);
+			LOGGER.debug("GuarantorAddressServiceImpl : updateGuarantorLocalAddress : Exit");
+			return "!!..Guarantor Local Address Updated Succesfully";
+		}
+		else
+		{
+			LOGGER.debug("GuarantorAddressServiceImpl : updateGuarantorLocalAddress : Exit");
+			throw new CustomeException("!!!...For Given Applicant Id Guarantor is not Present...!!!");
+		}
+	}
+
+}
