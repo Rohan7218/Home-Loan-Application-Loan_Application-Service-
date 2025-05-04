@@ -3,9 +3,8 @@ package com.example.application.dto;
 import lombok.Data;
 
 @Data
-public class GuarantorAddressDTO {
-
-	
+public class GuarantorAddressDTO 
+{	
 	private String localAreaname;
 
 	private String localCityname;
@@ -20,8 +19,6 @@ public class GuarantorAddressDTO {
 
 	private String localStreetName;
 	
-	
-	
 	private String permanentAreaname;
 
 	private String permanentCityname;
@@ -34,6 +31,5 @@ public class GuarantorAddressDTO {
 
 	private Integer permanentHouseNumber;
 
-	
 	private String permanentStreetName;
 }

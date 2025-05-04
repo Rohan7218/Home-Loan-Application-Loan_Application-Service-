@@ -30,16 +30,18 @@ public class LoanDetailsController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(LoanDetailsController.class);
 
 
-	@PostMapping(value = "/loanDetails")
-	public ResponseEntity<String> addLoanDetails(@RequestBody LoanDetailsDTO loanDetailsDTO) {
+	@PostMapping(value = "/loanDetails/{loanDetailsID}")
+	public ResponseEntity<ApiResponse<String>> addLoanDetails(@RequestBody LoanDetailsDTO loanDetailsDTO,@PathVariable  Integer loanDetailsID) {
 		LOGGER.info("LoanDetailsController : PostMapping : addLoanDetails : Entry");
 
-		String msg = loanDetailsService.addLoanDetails(loanDetailsDTO);
-		if (msg != null) {
-			return new ResponseEntity<String>(msg, HttpStatus.CREATED);
+		String msg = loanDetailsService.addLoanDetails(loanDetailsDTO,loanDetailsID);
+		if (msg != null) 
+		{
+			ApiResponse<String> apiResponse=new ApiResponse<String>(msg);
+			return new ResponseEntity<ApiResponse<String>>(apiResponse, HttpStatus.CREATED);
 		}
 		LOGGER.info("LoanDetailsController : PostMapping : addLoanDetails : Exit");
-		return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<ApiResponse<String>>(HttpStatus.BAD_REQUEST);
 	}
 
 	@GetMapping(value = "/loanDetails")
