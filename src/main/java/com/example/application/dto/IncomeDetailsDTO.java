@@ -35,8 +35,11 @@ public class IncomeDetailsDTO
 	@Enumerated(EnumType.STRING)
 	private CheckOffAvailableEnum checkOff;
 	
-   private Integer totalBusinessExperienceInYears;
-	
+
+	private Integer totalBusinessExperienceInYears;
+
+  private Integer totalBusinessExperienceInYears;
+
 	private Integer totalBusinessExperienceInMonths;
 	
 	private Double grossMonthlyIncome;

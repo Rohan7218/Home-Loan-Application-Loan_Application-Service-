@@ -12,6 +12,7 @@ import com.example.application.dto.GuarantorDetailsDTO;
 import com.example.application.dto.UpdateGuarantorDetailsDTO;
 import com.example.application.entity.ApplicantDetails;
 import com.example.application.entity.GuarantorDetails;
+import com.example.application.exceptionhandling.CustomeException;
 import com.example.application.repository.ApplicantDetailsRepository;
 import com.example.application.repository.GuarantorDetailsRespotory;
 import com.example.application.service.GuarantorDetailsService;
@@ -46,13 +47,18 @@ public class GuarantorDetailsServiceImpl implements GuarantorDetailsService
 			LOGGER.debug("GuarantorDetailsServiceImpl : addGuarantorDetails : Exit");
 			return "!!..GuarantorDetails Added Succesfully ..!!";
 		}
-		return null;
+		else
+		{
+			LOGGER.debug("GuarantorDetailsServiceImpl : addGuarantorDetails : Exit");
+			throw new CustomeException("!!!...Invalid GuarantorId...!!!");
+		}
 		
 	}
 	
 	
 	@Override
-	public GuarantorDetails getGuarantorDetails(Integer applicantId) {
+	public GuarantorDetails getGuarantorDetails(Integer applicantId) 
+	{
 		Optional<ApplicantDetails> optional = applicantDetailsRepository.findById(applicantId);
 		if(optional.isPresent())
 		{
@@ -61,7 +67,11 @@ public class GuarantorDetailsServiceImpl implements GuarantorDetailsService
 			LOGGER.debug("GuarantorDetailsServiceImpl : getGuarantorDetails : Exit");
 			return guarantorDetails;
 		}
-		return null;
+		else
+		{
+			LOGGER.debug("GuarantorDetailsServiceImpl : getGuarantorDetails : Exit");
+			throw new CustomeException("!!!...For Given Applicant Id Guarantor is not Present...!!!");
+		}
 	}
 	
 	@Override
@@ -108,7 +118,11 @@ public class GuarantorDetailsServiceImpl implements GuarantorDetailsService
 			LOGGER.debug("GuarantorDetailsServiceImpl : getGuarantorDetails : Exit");
 			return "!!..Guarantor Details Updated Succesfully ";
 		}
-		return "!!..Record Not Found For that Applicant Id :"+" "+applicantId;
+		else
+		{
+			LOGGER.debug("GuarantorDetailsServiceImpl : getGuarantorDetails : Exit");
+			throw new CustomeException("!!!...For Given Applicant Id Guarantor is not Present...!!!");
+		}
 	}
 	
 }
