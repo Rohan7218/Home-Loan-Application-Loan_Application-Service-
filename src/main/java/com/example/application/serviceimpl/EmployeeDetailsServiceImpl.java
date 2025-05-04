@@ -29,7 +29,8 @@ public class EmployeeDetailsServiceImpl implements EmployeeDetailsService
 	
 	
 	@Override
-	public String registerEmployee(EmployeeDetailsDTO employeeDetailsDTO) {
+	public String registerEmployee(EmployeeDetailsDTO employeeDetailsDTO)
+	{
 		LOGGER.debug("EmployeeDetailsServiceImpl : registerEmployee : Entry");
 		EmployeeDetails employeeDetails = modelMapper.map(employeeDetailsDTO, EmployeeDetails.class);
 		employeeDetails.setPassword(generatePassword());
@@ -96,14 +97,6 @@ public class EmployeeDetailsServiceImpl implements EmployeeDetailsService
 		LOGGER.debug("EmployeeDetailsServiceImpl : updateEmployeeDetails : Exit");
 		return "Employee Details Not Found ID :-"+" "+employeeID;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	public static String generatePassword() {
 		String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";

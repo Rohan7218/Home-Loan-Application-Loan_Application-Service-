@@ -9,7 +9,7 @@ import com.example.application.entity.PropertyDetails;
 
 public interface PropertyDetailsService {
 
-	String addPropertyDetails(PropertyDetailsDTO propertyDetailsDTO);
+	String addPropertyDetails(PropertyDetailsDTO propertyDetailsDTO, Integer propertyDetailsID);
 
 	List<PropertyDetails> getAllPropertyDetails();
 
