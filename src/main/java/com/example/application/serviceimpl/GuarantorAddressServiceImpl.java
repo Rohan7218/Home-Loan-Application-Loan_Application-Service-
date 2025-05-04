@@ -46,6 +46,9 @@ public class GuarantorAddressServiceImpl implements GuarantorAddressService {
 			GuarantorLocalAddress localAddress = modelMapper.map(guarantorAddressDTO, GuarantorLocalAddress.class);
 			GuarantorPermanentAddress permanentAddress = modelMapper.map(guarantorAddressDTO,
 					GuarantorPermanentAddress.class);
+			
+			localAddress.setLocalAddressId(guarantorId);
+			permanentAddress.setLocalAddressId(guarantorId);
 
 			guarantorLoaclAddressRepository.save(localAddress);
 			guarantorPermanentAddressRepositoy.save(permanentAddress);
