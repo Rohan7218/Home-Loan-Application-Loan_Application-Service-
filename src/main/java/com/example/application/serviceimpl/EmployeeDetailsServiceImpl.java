@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.example.application.dto.EmployeeDetailsDTO;
 import com.example.application.dto.EmployeeDetailsUpdateDTO;
 import com.example.application.entity.EmployeeDetails;
+import com.example.application.exceptionhandling.CustomeException;
 import com.example.application.repository.EmployeeDetailsRepository;
 import com.example.application.service.EmployeeDetailsService;
 
@@ -41,7 +42,8 @@ public class EmployeeDetailsServiceImpl implements EmployeeDetailsService
 	
 	
 	@Override
-	public EmployeeDetails getEmployee(Integer employeeID) {
+	public EmployeeDetails getEmployee(Integer employeeID) 
+	{
 		Optional<EmployeeDetails> optional = employeeDetailsRepository.findById(employeeID);
 		if(optional.isPresent())
 		{
@@ -50,21 +52,34 @@ public class EmployeeDetailsServiceImpl implements EmployeeDetailsService
 			LOGGER.debug("EmployeeDetailsServiceImpl : getEmployee : Exit");
 			return employeeDetails;
 		}
-		return null;
+		else
+		{
+			LOGGER.debug("EmployeeDetailsServiceImpl : getEmployee : Exit");
+			throw new CustomeException("!!!...No Employee Found for Given Employee Id...!!!");
+		}
+		
 	}
 	
-	
 	@Override
-	public List<EmployeeDetails> getAllEmployee() {
-		LOGGER.debug("EmployeeDetailsServiceImpl : getEmployee : Entry");
+	public List<EmployeeDetails> getAllEmployee() 
+	{
+		LOGGER.debug("EmployeeDetailsServiceImpl : getAllEmployee : Entry");
 		List<EmployeeDetails> list = employeeDetailsRepository.findAll();
-		LOGGER.debug("EmployeeDetailsServiceImpl : getEmployee : Exit");
-		return list;
+		if(!list.isEmpty())
+		{
+			LOGGER.debug("EmployeeDetailsServiceImpl : getAllEmployee : Exit");
+			return list;
+		}
+		else
+		{
+			LOGGER.debug("EmployeeDetailsServiceImpl : getAllEmployee : Exit");
+			throw new CustomeException("!!!...No Employees Record Found....!!!");
+		}
 	}
 	
-	
 	@Override
-	public String updateEmployeeDetails(Integer employeeID, EmployeeDetailsUpdateDTO employeeDetailsUpdateDTO) {
+	public String updateEmployeeDetails(Integer employeeID, EmployeeDetailsUpdateDTO employeeDetailsUpdateDTO) 
+	{
 		LOGGER.debug("EmployeeDetailsServiceImpl : updateEmployeeDetails : Entry");
 		Optional<EmployeeDetails> optional = employeeDetailsRepository.findById(employeeID);
 		if(optional.isPresent())
@@ -94,8 +109,11 @@ public class EmployeeDetailsServiceImpl implements EmployeeDetailsService
 				LOGGER.debug("EmployeeDetailsServiceImpl : updateEmployeeDetails : Exit");
 				return "Employee Details Updated Succesfully ID :-"+" "+employeeID;
 		}
-		LOGGER.debug("EmployeeDetailsServiceImpl : updateEmployeeDetails : Exit");
-		return "Employee Details Not Found ID :-"+" "+employeeID;
+		else
+		{
+			LOGGER.debug("EmployeeDetailsServiceImpl : updateEmployeeDetails : Exit");
+			throw new CustomeException("!!!...For Given Employee Id No Employee Found....!!!");
+		}
 	}
 	
 	public static String generatePassword() {

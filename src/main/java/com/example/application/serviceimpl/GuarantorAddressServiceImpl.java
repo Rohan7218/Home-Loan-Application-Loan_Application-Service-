@@ -11,6 +11,7 @@ import com.example.application.dto.UpdateGuarantorAddressDTO;
 import com.example.application.entity.GuarantorDetails;
 import com.example.application.entity.GuarantorLocalAddress;
 import com.example.application.entity.GuarantorPermanentAddress;
+import com.example.application.exceptionhandling.CustomeException;
 import com.example.application.repository.ApplicantDetailsRepository;
 import com.example.application.repository.GuarantorDetailsRespotory;
 import com.example.application.repository.GuarantorLoaclAddressRepository;
@@ -57,13 +58,16 @@ public class GuarantorAddressServiceImpl implements GuarantorAddressService {
 			LOGGER.debug("GuarantorAddressServiceImpl : addGuarantorAddress : Exit");
 			return "!!..Guarantor Local And Permanent Address Add Succesfully ..!!";
 		}	
-		
-			return null;
+		else
+		{
+			LOGGER.debug("GuarantorAddressServiceImpl : addGuarantorAddress : Exit");
+			throw new CustomeException("!!!...Invalid Guarantor Id...!!!");
+		}
 	}
 
 	@Override
-	public String updateGuarantorLocalAddress(Integer applicantId,
-			UpdateGuarantorAddressDTO updateGuarantorAddressDTO) {
+	public String updateGuarantorLocalAddress(Integer applicantId, UpdateGuarantorAddressDTO updateGuarantorAddressDTO) 
+	{
 		if (applicantDetailsRepository.existsById(applicantId))
 		{
 			LOGGER.debug("GuarantorAddressServiceImpl : updateGuarantorLocalAddress : Entry");
@@ -106,7 +110,11 @@ public class GuarantorAddressServiceImpl implements GuarantorAddressService {
 			LOGGER.debug("GuarantorAddressServiceImpl : updateGuarantorLocalAddress : Exit");
 			return "!!..Guarantor Local Address Updated Succesfully";
 		}
-		return "!!..Record Not Found For that Applicant Id :"+" "+applicantId;
+		else
+		{
+			LOGGER.debug("GuarantorAddressServiceImpl : updateGuarantorLocalAddress : Exit");
+			throw new CustomeException("!!!...For Given Applicant Id Guarantor is not Present...!!!");
+		}
 	}
 
 }
