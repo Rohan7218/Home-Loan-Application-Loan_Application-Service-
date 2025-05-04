@@ -54,6 +54,7 @@ public class EmployeeDetailsServiceImpl implements EmployeeDetailsService
 		}
 		else
 		{
+			LOGGER.debug("EmployeeDetailsServiceImpl : getEmployee : Exit");
 			throw new CustomeException("!!!...No Employee Found for Given Employee Id...!!!");
 		}
 		
@@ -62,21 +63,23 @@ public class EmployeeDetailsServiceImpl implements EmployeeDetailsService
 	@Override
 	public List<EmployeeDetails> getAllEmployee() 
 	{
-		LOGGER.debug("EmployeeDetailsServiceImpl : getEmployee : Entry");
+		LOGGER.debug("EmployeeDetailsServiceImpl : getAllEmployee : Entry");
 		List<EmployeeDetails> list = employeeDetailsRepository.findAll();
 		if(!list.isEmpty())
 		{
-			LOGGER.debug("EmployeeDetailsServiceImpl : getEmployee : Exit");
+			LOGGER.debug("EmployeeDetailsServiceImpl : getAllEmployee : Exit");
 			return list;
 		}
 		else
 		{
+			LOGGER.debug("EmployeeDetailsServiceImpl : getAllEmployee : Exit");
 			throw new CustomeException("!!!...No Employees Record Found....!!!");
 		}
 	}
 	
 	@Override
-	public String updateEmployeeDetails(Integer employeeID, EmployeeDetailsUpdateDTO employeeDetailsUpdateDTO) {
+	public String updateEmployeeDetails(Integer employeeID, EmployeeDetailsUpdateDTO employeeDetailsUpdateDTO) 
+	{
 		LOGGER.debug("EmployeeDetailsServiceImpl : updateEmployeeDetails : Entry");
 		Optional<EmployeeDetails> optional = employeeDetailsRepository.findById(employeeID);
 		if(optional.isPresent())
