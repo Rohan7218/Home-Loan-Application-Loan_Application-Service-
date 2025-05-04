@@ -29,7 +29,8 @@ public class EmployeeDetailsServiceImpl implements EmployeeDetailsService
 	
 	
 	@Override
-	public String registerEmployee(EmployeeDetailsDTO employeeDetailsDTO) {
+	public String registerEmployee(EmployeeDetailsDTO employeeDetailsDTO)
+	{
 		LOGGER.debug("EmployeeDetailsServiceImpl : registerEmployee : Entry");
 		EmployeeDetails employeeDetails = modelMapper.map(employeeDetailsDTO, EmployeeDetails.class);
 		employeeDetails.setPassword(generatePassword());
