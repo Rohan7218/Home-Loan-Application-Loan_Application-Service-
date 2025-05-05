@@ -38,8 +38,6 @@ public class IncomeDetailsDTO
 
 	private Integer totalBusinessExperienceInYears;
 
-  private Integer totalBusinessExperienceInYears;
-
 	private Integer totalBusinessExperienceInMonths;
 	
 	private Double grossMonthlyIncome;
