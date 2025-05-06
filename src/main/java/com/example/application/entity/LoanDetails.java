@@ -14,7 +14,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import com.example.application.dto.AccountTypeEnum;
 import com.example.application.dto.LoanPurposeEnum;
-import com.example.application.dto.accountStatusEnum;
+import com.example.application.dto.AccountStatusEnum;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
