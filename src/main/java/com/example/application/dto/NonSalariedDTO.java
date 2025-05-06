@@ -40,6 +40,8 @@ public class NonSalariedDTO
 	
 	private Long mobileNo;
 	
+	private String fullname;
+	
 	@Enumerated(EnumType.STRING)
 	private defencePersonnelEnum defence;
 }
