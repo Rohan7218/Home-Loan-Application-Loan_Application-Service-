@@ -1,8 +1,12 @@
 package com.example.application.entity;
 
+import java.time.LocalDate;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,6 +15,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
+
+import com.example.application.dto.AccountStatusEnum;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,6 +37,12 @@ public class ApplicantDetails
 	
 	@Column(name = "Customer_Id")
 	private Integer customerId;
+	
+	@Column(name = "Cibil_Score")
+	private Integer cibilScore;
+	
+	@Enumerated(EnumType.STRING)
+	private AccountStatusEnum accountStatus;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "Property_Id")
@@ -47,6 +59,8 @@ public class ApplicantDetails
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "Income_Id")
 	private IncomeDetails incomeId;
+	
+	
 	
 	
 
