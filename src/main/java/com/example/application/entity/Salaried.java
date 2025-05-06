@@ -57,6 +57,9 @@ public class Salaried
 	@Column(name = "Industy_Name")
 	private String jobIndustryName;
 	
+	@Column(name = "Contact_Number")
+	private Long contactNo;
+	
 	@Column(name = "Gross_Monthly_Name")
 	private Double employeeGrossMonthlyIncome;
 	

@@ -25,6 +25,8 @@ public class SalariedDTO
 	
 	private String jobIndustryName; 
 	
+	private Long contactNo;
+	
 	private Double employeeGrossMonthlyIncome;
 	
 	private Double employeeNetMonthlyIncome;

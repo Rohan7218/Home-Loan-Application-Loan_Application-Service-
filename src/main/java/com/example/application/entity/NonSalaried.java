@@ -47,6 +47,12 @@ public class NonSalaried
 	@Column(name = "Business_Name")
 	private String businessName;
 	
+	@Column(name = "MobileNumber")
+	private Long mobileNo;
+	
+	@Column(name = "Full_Name")
+	private String fullname;
+	
 	@Column(name = "Industy_Name")
 	private String industryName; 
 	
@@ -76,10 +82,7 @@ public class NonSalaried
 	
 	@Column(name = "Telephone_Number")
 	private Long telephoneNo;
-	
-	@Column(name = "MobileNumber")
-	private Long mobileNo;
-	
+		
 	@Enumerated(EnumType.STRING)
 	@Column(name = "Deference_Name")
 	private defencePersonnelEnum defence;
