@@ -67,6 +67,8 @@ public class IncomeDetailsDTO
 	
 	private Long mobileNo;
 	
+	private Long contactNo;
+	
 	@Enumerated(EnumType.STRING)
 	private defencePersonnelEnum defence;
 }
