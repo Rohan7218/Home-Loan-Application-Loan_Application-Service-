@@ -47,7 +47,7 @@ public class LoanDetails {
 	@Column(name = "IFSC_Code")
 	private String IFSC_Code;
 	
-	@Column(name = "Tenure_years")
+	@Column(name = "Tenure_Months")
 	private Integer tenure;
 	
 	@Column(name = "Moratorium_Period_Months")
@@ -56,7 +56,6 @@ public class LoanDetails {
 	@Column(name = "Requested_Loan_Amount")
 	private Long requestedLoanAmount;
 
-	
 	@Column(name = "Account_Type")
 	@Enumerated(EnumType.STRING)
 	private AccountTypeEnum accountType;
