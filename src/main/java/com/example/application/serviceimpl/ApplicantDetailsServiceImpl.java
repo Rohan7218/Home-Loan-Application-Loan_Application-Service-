@@ -63,6 +63,7 @@ public class ApplicantDetailsServiceImpl implements ApplicantDetailsService
 								  applicantDetails.setIncomeId(incomeDetails);
 								  applicantDetails.setCustomerId(loanApplicantionCustomerIdDTO.getCustomerId());
 								  applicantDetails.setCibilScore(loanApplicantionCustomerIdDTO.getCibilScore());
+								  applicantDetails.setEmailId(loanApplicantionCustomerIdDTO.getEmailId());
 				
 	    applicantDetailsRepository.save(applicantDetails);
 	    LOGGER.debug("ApplicantDetailsServiceImpl : PostMapping : addApplicantDetailsService : Exit");
@@ -96,6 +97,7 @@ public class ApplicantDetailsServiceImpl implements ApplicantDetailsService
 										         loanSanctionDTO.setIFSC_Code(applicantDetails.getLoanId().getIFSC_Code());
 										         loanSanctionDTO.setNetMonthlyIncome(applicantDetails.getIncomeId().getSalariedId().getEmployeeNetMonthlyIncome());
 										         loanSanctionDTO.setLoanTenureInMonth(applicantDetails.getLoanId().getTenure());
+										         loanSanctionDTO.setEmailId(applicantDetails.getEmailId());
 				loanSanctionApiFeignClient.addSanctionDetails(loanSanctionDTO);
 				}
 				else
@@ -111,6 +113,7 @@ public class ApplicantDetailsServiceImpl implements ApplicantDetailsService
 										        loanSanctionDTO.setIFSC_Code(applicantDetails.getLoanId().getIFSC_Code());
 										        loanSanctionDTO.setNetMonthlyIncome(applicantDetails.getIncomeId().getNonSalariedId().getNetMonthlyIncome());
 										        loanSanctionDTO.setLoanTenureInMonth(applicantDetails.getLoanId().getTenure());
+										        loanSanctionDTO.setEmailId(applicantDetails.getEmailId());
 					loanSanctionApiFeignClient.addSanctionDetails(loanSanctionDTO);
 												
 				}
