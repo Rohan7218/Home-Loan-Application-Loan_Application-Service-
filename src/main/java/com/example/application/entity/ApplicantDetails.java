@@ -41,6 +41,9 @@ public class ApplicantDetails
 	@Column(name = "Cibil_Score")
 	private Integer cibilScore;
 	
+	@Column(name = "Email_Id")
+	private String emailId;
+	
 	@Enumerated(EnumType.STRING)
 	private AccountStatusEnum accountStatus;
 
