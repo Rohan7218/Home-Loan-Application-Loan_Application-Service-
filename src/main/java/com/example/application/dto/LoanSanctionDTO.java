@@ -9,6 +9,8 @@ public class LoanSanctionDTO
 	
 	private Long contactNo;
 	
+	private String emailId;
+	
 	private Integer customerId;
 	
 	private Integer appllicantId;
