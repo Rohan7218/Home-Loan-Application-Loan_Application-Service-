@@ -96,7 +96,8 @@ public class PropertyDetails {
 	@Column(name = "Property_Market_Value")
 	private Double propertyValue;
 	
-//	private Double saleAggreementValue;
+	@Column(name = "Down_Payment")
+	private Double downPayment;
 	
 	@Lob
 	private byte[] saleAgreement;
