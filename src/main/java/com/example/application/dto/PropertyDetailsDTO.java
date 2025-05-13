@@ -62,5 +62,7 @@ public class PropertyDetailsDTO {
 	
 
 	private Double propertyValue;
+	
+	private Double downPayment;
 
 }
